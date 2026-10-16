@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcademiaConnect</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+
+        <div class="logo">
+            Academia<span>Connect</span>
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#opportunities">Opportunities</a>
+            <a href="#about">About</a>
+        </nav>
+
+        <div class="nav-right">
+            <div id="backendStatusBadge" class="backend-badge checking" onclick="checkBackendConnection()" title="Click to test backend connection">
+                <span class="status-dot"></span>
+                <span id="backendStatusText">Connecting to API...</span>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="nav-search" id="navSearchContainer" style="display:none;">
+                <input type="text" id="navSearchInput" placeholder="Search users, skills, ideas..." autocomplete="off" onkeydown="if(event.key==='Enter') doSearch()">
+                <button class="nav-search-btn" onclick="doSearch()">🔍</button>
+            </div>
+
+            <!-- Notification Bell -->
+            <div class="notif-container" id="notifContainer" style="display:none;">
+                <button class="notif-btn" onclick="toggleNotifPanel()" id="notifBell">
+                    🔔 <span class="notif-badge" id="notifCount" style="display:none;">0</span>
+                </button>
+                <div class="notif-panel" id="notifPanel" style="display:none;">
+                    <div class="notif-header">
+                        <span>Notifications</span>
+                        <button class="mark-all-read-btn" onclick="markAllNotifRead()">Mark all read</button>
+                    </div>
+                    <div id="notifList" class="notif-list">
+                        <p class="notif-empty">No notifications yet.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="authNavContainer">
+                <button class="login-btn" id="navLoginBtn" onclick="showLogin()">Login</button>
+            </div>
+        </div>
+
+    </header>
+
+
+    <!-- ================= HERO SECTION ================= -->
+    <section id="home" class="hero">
+
+        <div class="hero-text">
+            <p class="small-heading">ACADEMIA × INDUSTRY</p>
+            <h1>Bridge the Gap Between <span>Academia &amp; Industry</span></h1>
+            <p class="hero-description">
+                Discover your skills, identify your skill gaps,
+                learn what industry needs and find opportunities that match your profile.
+            </p>
+            <div class="hero-buttons">
+                <button class="primary-btn" onclick="startJourney()">Get Started →</button>
+                <button class="secondary-btn" onclick="scrollToOpportunities()">Explore Opportunities</button>
+            </div>
+        </div>
+
+        <div class="hero-card">
+            <div class="card-header">
+                <span>Career Readiness</span>
+                <span class="status">● Active</span>
+            </div>
+            <div class="readiness">
+                <div class="circle">
+                    <strong>78%</strong>
+                    <small>Ready</small>
+                </div>
+            </div>
+            <div class="skill">
+                <div><span>Python</span><span>90%</span></div>
+                <div class="progress"><div class="progress-fill python"></div></div>
+            </div>
+            <div class="skill">
+                <div><span>JavaScript</span><span>75%</span></div>
+                <div class="progress"><div class="progress-fill javascript"></div></div>
+            </div>
+            <div class="skill">
+                <div><span>React</span><span>50%</span></div>
+                <div class="progress"><div class="progress-fill react"></div></div>
+            </div>
+            <div class="skill-gap">
+                ⚠ Skill Gap Detected
+                <p>Improve React &amp; Git to increase your career readiness.</p>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ================= HOW IT WORKS ================= -->
+    <section class="how-it-works">
+        <p class="section-label">HOW IT WORKS</p>
+        <h2>From Skills to Opportunities</h2>
+        <p class="section-description">Our platform helps students move from learning to industry opportunities.</p>
+        <div class="steps">
+            <div class="step"><div class="step-number">01</div><h3>Assess</h3><p>Take a skill assessment and understand your current abilities.</p></div>
+            <div class="step"><div class="step-number">02</div><h3>Identify</h3><p>Find the skills you need to improve for your desired career.</p></div>
+            <div class="step"><div class="step-number">03</div><h3>Learn</h3><p>Get personalized learning recommendations based on your skill gaps.</p></div>
+            <div class="step"><div class="step-number">04</div><h3>Connect</h3><p>Discover internships and jobs matching your skills.</p></div>
+        </div>
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+    <section id="features" class="features">
+        <p class="section-label">PLATFORM FEATURES</p>
+        <h2>Everything You Need to Grow</h2>
+        <div class="feature-grid">
+            <div class="feature-card"><div class="feature-icon">🧠</div><h3>Skill Assessment</h3><p>Evaluate your technical, aptitude and soft skills.</p></div>
+            <div class="feature-card"><div class="feature-icon">🎯</div><h3>Skill Gap Analysis</h3><p>Understand exactly what skills you need for your target role.</p></div>
+            <div class="feature-card"><div class="feature-icon">🤖</div><h3>Smart Matching</h3><p>Find internships and jobs that match your skills.</p></div>
+            <div class="feature-card"><div class="feature-icon">📚</div><h3>Learning Recommendations</h3><p>Discover courses and resources to close your skill gaps.</p></div>
+            <div class="feature-card"><div class="feature-icon">💼</div><h3>Internships &amp; Jobs</h3><p>Apply for relevant opportunities directly through the platform.</p></div>
+            <div class="feature-card"><div class="feature-icon">📁</div><h3>Digital Portfolio</h3><p>Showcase projects, skills, certifications and achievements.</p></div>
+        </div>
+    </section>
+
+
+    <!-- ================= OPPORTUNITIES ================= -->
+    <section id="opportunities" class="opportunities">
+        <p class="section-label">OPPORTUNITIES</p>
+        <h2>Find Your Next Opportunity</h2>
+        <div class="opportunity-grid" id="opportunityGrid"></div>
+    </section>
+
+
+    <!-- ================= CTA ================= -->
+    <section class="cta">
+        <h2>Ready to Build Your Career?</h2>
+        <p>Assess your skills. Close your gaps. Connect with industry.</p>
+        <button class="primary-btn" onclick="startJourney()">Start Your Journey →</button>
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer id="about">
+        <div class="logo">Academia<span>Connect</span></div>
+        <p>Connecting students, academia and industry.</p>
+        <p class="copyright">© 2026 AcademiaConnect</p>
+    </footer>
+
+
+    <!-- ================================================================
+         PROFILE PANEL (Side overlay)
+         ================================================================ -->
+    <div id="profileOverlay" class="overlay" style="display:none;" onclick="closeProfile()"></div>
+    <aside id="profilePanel" class="side-panel" style="display:none;">
+        <div class="side-panel-header">
+            <h2 id="profilePanelTitle">My Profile</h2>
+            <button class="close-panel-btn" onclick="closeProfile()">✕</button>
+        </div>
+        <div id="profilePanelContent" class="side-panel-content"></div>
+    </aside>
+
+
+    <!-- ================================================================
+         SEARCH RESULTS PANEL
+         ================================================================ -->
+    <div id="searchOverlay" class="overlay" style="display:none;" onclick="closeSearch()"></div>
+    <aside id="searchPanel" class="side-panel" style="display:none;">
+        <div class="side-panel-header">
+            <h2>Search Results</h2>
+            <button class="close-panel-btn" onclick="closeSearch()">✕</button>
+        </div>
+        <div class="side-panel-search-bar">
+            <input type="text" id="searchPanelInput" placeholder="Search again..." onkeydown="if(event.key==='Enter') doSearch()">
+            <button onclick="doSearch()">🔍</button>
+        </div>
+        <div id="searchResults" class="side-panel-content"></div>
+    </aside>
+
+
+    <!-- ================================================================
+         CHAT PANEL
+         ================================================================ -->
+    <div id="chatOverlay" class="overlay" style="display:none;" onclick="closeChat()"></div>
+    <aside id="chatPanel" class="side-panel chat-panel" style="display:none;">
+        <div class="side-panel-header">
+            <h2 id="chatPanelTitle">Chat</h2>
+            <button class="close-panel-btn" onclick="closeChat()">✕</button>
+        </div>
+        <div id="chatMessages" class="chat-messages"></div>
+        <div class="chat-input-bar">
+            <input type="text" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter') sendChatMessage()">
+            <button class="primary-btn" onclick="sendChatMessage()">Send</button>
+        </div>
+    </aside>
+
+
+    <!-- ================================================================
+         VIEW OTHER USER PROFILE PANEL
+         ================================================================ -->
+    <div id="viewProfileOverlay" class="overlay" style="display:none;" onclick="closeViewProfile()"></div>
+    <aside id="viewProfilePanel" class="side-panel" style="display:none;">
+        <div class="side-panel-header">
+            <h2 id="viewProfileTitle">User Profile</h2>
+            <button class="close-panel-btn" onclick="closeViewProfile()">✕</button>
+        </div>
+        <div id="viewProfileContent" class="side-panel-content"></div>
+    </aside>
+
+
+    <!-- ================================================================
+         OPPORTUNITY MATCH PANEL
+         ================================================================ -->
+    <div id="oppCheckOverlay" class="overlay" style="display:none;" onclick="closeOppCheck()"></div>
+    <aside id="oppCheckPanel" class="side-panel" style="display:none;">
+        <div class="side-panel-header">
+            <h2>Opportunity Check</h2>
+            <button class="close-panel-btn" onclick="closeOppCheck()">✕</button>
+        </div>
+        <div id="oppCheckContent" class="side-panel-content"></div>
+    </aside>
+
+
+    <!-- ================================================================
+         LOGIN / REGISTER MODAL (Multi-step)
+         ================================================================ -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content" id="authModalContent">
+
+            <span class="close" onclick="closeLogin()">×</span>
+
+            <h2 id="modalTitle">Welcome Back 👋</h2>
+            <p id="modalSubtitle">Login to AcademiaConnect</p>
+
+            <div id="modalAlert" class="modal-alert"></div>
+
+            <!-- Step indicator (Register only) -->
+            <div id="regStepIndicator" style="display:none;" class="step-indicator">
+                <div class="step-dot active" id="sdot1" title="Basic Info">1</div>
+                <div class="step-line"></div>
+                <div class="step-dot" id="sdot2" title="Skills">2</div>
+                <div class="step-line"></div>
+                <div class="step-dot" id="sdot3" title="Interests">3</div>
+            </div>
+
+            <!-- Role Selector (Register mode only) -->
+            <div id="roleSelector" class="role-selector" style="display:none;">
+                <button type="button" class="role-tab-btn active" id="tabStudent" onclick="selectRole('student')">🎓 <span>Student</span></button>
+                <button type="button" class="role-tab-btn" id="tabIndividual" onclick="selectRole('individual')">👤 <span>Individual</span></button>
+                <button type="button" class="role-tab-btn" id="tabEnterprise" onclick="selectRole('enterprise')">🏢 <span>Enterprise</span></button>
+            </div>
+
+            <form id="authForm" onsubmit="handleAuthSubmit(event)" novalidate>
+
+                <!-- ============ LOGIN SECTION ============ -->
+                <div id="sectionLogin">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="Enter your email" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password">
+                    </div>
+                </div>
+
+                <!-- ============ REG STEP 1: STUDENT ============ -->
+                <div id="regStep1Student" style="display:none;">
+                    <div class="form-group">
+                        <label for="sName">Full Name *</label>
+                        <input type="text" id="sName" placeholder="e.g. Alex Johnson" autocomplete="name">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sDob">Date of Birth *</label>
+                            <input type="date" id="sDob" max="">
+                        </div>
+                        <div class="form-group">
+                            <label for="sGender">Gender *</label>
+                            <select id="sGender" class="form-select">
+                                <option value="">Select...</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="non-binary">Non-binary</option>
+                                <option value="prefer-not-to-say">Prefer not to say</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sNationality">Nationality *</label>
+                        <select id="sNationality" class="form-select" onchange="onNationalityChange('s')">
+                            <option value="">Select country...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sPhone">Phone Number *</label>
+                        <div class="phone-input-group">
+                            <span class="dial-code" id="sDialCode">+</span>
+                            <input type="tel" id="sPhone" placeholder="Phone number">
+                        </div>
+                        <span class="form-hint" id="sPhoneHint"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="sInstitution">School / College *</label>
+                        <input type="text" id="sInstitution" placeholder="e.g. Stanford University">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sInstId">Institutional ID *</label>
+                            <input type="text" id="sInstId" placeholder="e.g. STU-2026-081">
+                            <span class="form-hint">Valid Roll No / Student ID</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="sClass">Class / Grade / Year *</label>
+                            <input type="text" id="sClass" placeholder="e.g. 3rd Year / 12th">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sEmail">Institutional Email *</label>
+                        <input type="email" id="sEmail" placeholder="e.g. alex@university.edu">
+                    </div>
+                    <div class="form-group">
+                        <label for="sField">Field of Study <span class="opt">(Optional)</span></label>
+                        <input type="text" id="sField" placeholder="e.g. Computer Science">
+                    </div>
+                    <div class="form-group">
+                        <label for="sPassword">Password *</label>
+                        <input type="password" id="sPassword" placeholder="Min. 6 characters" autocomplete="new-password">
+                    </div>
+                </div>
+
+                <!-- ============ REG STEP 1: INDIVIDUAL ============ -->
+                <div id="regStep1Individual" style="display:none;">
+                    <div class="form-group">
+                        <label for="iName">Full Name *</label>
+                        <input type="text" id="iName" placeholder="e.g. Sarah Connor" autocomplete="name">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="iDob">Date of Birth *</label>
+                            <input type="date" id="iDob" max="">
+                        </div>
+                        <div class="form-group">
+                            <label for="iGender">Gender *</label>
+                            <select id="iGender" class="form-select">
+                                <option value="">Select...</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="non-binary">Non-binary</option>
+                                <option value="prefer-not-to-say">Prefer not to say</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="iNationality">Nationality *</label>
+                        <select id="iNationality" class="form-select" onchange="onNationalityChange('i')">
+                            <option value="">Select country...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="iPhone">Phone Number *</label>
+                        <div class="phone-input-group">
+                            <span class="dial-code" id="iDialCode">+</span>
+                            <input type="tel" id="iPhone" placeholder="Phone number">
+                        </div>
+                        <span class="form-hint" id="iPhoneHint"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="iEmail">Email Address *</label>
+                        <input type="email" id="iEmail" placeholder="e.g. sarah@example.com" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="iPassword">Password *</label>
+                        <input type="password" id="iPassword" placeholder="Min. 6 characters" autocomplete="new-password">
+                    </div>
+                </div>
+
+                <!-- ============ REG STEP 1: ENTERPRISE ============ -->
+                <div id="regStep1Enterprise" style="display:none;">
+                    <div class="form-group">
+                        <label for="eName">Name of Enterprise / Company *</label>
+                        <input type="text" id="eName" placeholder="e.g. TechCorp Solutions Inc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="eRole">Your Role in Enterprise *</label>
+                        <input type="text" id="eRole" placeholder="e.g. HR Director, Hiring Manager">
+                    </div>
+                    <div class="form-group">
+                        <label for="eCountry">Enterprise Based In *</label>
+                        <select id="eCountry" class="form-select">
+                            <option value="">Select country...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="eNationality">Phone Country *</label>
+                        <select id="eNationality" class="form-select" onchange="onNationalityChange('e')">
+                            <option value="">Select country for phone...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ePhone">Phone Number *</label>
+                        <div class="phone-input-group">
+                            <span class="dial-code" id="eDialCode">+</span>
+                            <input type="tel" id="ePhone" placeholder="Phone number">
+                        </div>
+                        <span class="form-hint" id="ePhoneHint"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="eEmail">Enterprise Work Email *</label>
+                        <input type="email" id="eEmail" placeholder="e.g. hr@techcorp.com" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="ePassword">Password *</label>
+                        <input type="password" id="ePassword" placeholder="Min. 6 characters" autocomplete="new-password">
+                    </div>
+                </div>
+
+                <!-- ============ REG STEP 2: SKILLS ============ -->
+                <div id="regStep2" style="display:none;">
+                    <div class="step-section-title" id="step2Title">
+                        🧠 Select Your Skills / Area of Expertise
+                    </div>
+                    <p class="step-section-subtitle" id="step2Subtitle">
+                        Choose up to <strong>5 skills</strong>. You can add more after registration.
+                    </p>
+                    <div class="skills-grid" id="skillsGrid"></div>
+                    <div id="otherSkillContainer" class="form-group" style="margin-top:12px; display:none;">
+                        <label for="otherSkillInput">Other Skill *</label>
+                        <input type="text" id="otherSkillInput" placeholder="Describe your skill...">
+                        <button type="button" class="add-other-btn" onclick="addOtherSkill()">+ Add</button>
+                    </div>
+                    <div class="selected-skills-list" id="selectedSkillsList">
+                        <p class="no-selection-hint">No skills selected yet. Click skills above to select.</p>
+                    </div>
+                </div>
+
+                <!-- ============ REG STEP 3: INTERESTS + IDEA ============ -->
+                <div id="regStep3" style="display:none;">
+                    <div class="step-section-title">🌟 Areas of Interest</div>
+                    <p class="step-section-subtitle">Select all that interest you — no limit!</p>
+                    <div class="skills-grid" id="interestsGrid"></div>
+                    <div id="otherInterestContainer" class="form-group" style="margin-top:12px; display:none;">
+                        <label for="otherInterestInput">Other Interest *</label>
+                        <input type="text" id="otherInterestInput" placeholder="Describe your interest...">
+                        <button type="button" class="add-other-btn" onclick="addOtherInterest()">+ Add</button>
+                    </div>
+                    <div class="selected-skills-list" id="selectedInterestsList">
+                        <p class="no-selection-hint">No interests selected yet.</p>
+                    </div>
+
+                    <div class="idea-section">
+                        <div class="step-section-title">💡 Current Idea</div>
+                        <p class="step-section-subtitle">Do you have any idea you are currently working on?</p>
+                        <div class="idea-toggle">
+                            <button type="button" class="idea-btn active" id="ideaBtnNo" onclick="setHasIdea(false)">No, not currently</button>
+                            <button type="button" class="idea-btn" id="ideaBtnYes" onclick="setHasIdea(true)">Yes, I have an idea!</button>
+                        </div>
+                        <div id="ideaInputContainer" style="display:none;" class="form-group">
+                            <label for="ideaInput">Describe your idea *</label>
+                            <textarea id="ideaInput" class="form-textarea" placeholder="Briefly describe your idea or project..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="form-nav-btns" id="formNavBtns" style="display:none;">
+                    <button type="button" class="secondary-btn" id="btnBack" onclick="regBack()" style="display:none;">← Back</button>
+                    <button type="button" class="primary-btn" id="btnNext" onclick="regNext()">Next →</button>
+                </div>
+
+                <button type="submit" class="primary-btn full-width" id="authSubmitBtn">Login</button>
+
+            </form>
+
+            <p class="register" id="authToggleContainer">
+                <span id="authTogglePrompt">Don't have an account?</span>
+                <button type="button" class="toggle-auth-btn" id="authToggleBtn" onclick="toggleAuthMode()">Register</button>
+            </p>
+
+        </div>
+    </div>
+
+
+    <!-- Config must load before script.js — edit config.js to set your backend URL -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
